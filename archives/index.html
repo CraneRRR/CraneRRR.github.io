@@ -15,21 +15,18 @@
 
 
 
-<meta name="description" content="stay so cool.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CraneRRR&#39;s Blog">
+<meta property="og:title" content="任九皋的blog">
 <meta property="og:url" content="http://yoursite.com/archives/index.html">
-<meta property="og:site_name" content="CraneRRR&#39;s Blog">
-<meta property="og:description" content="stay so cool.">
+<meta property="og:site_name" content="任九皋的blog">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CraneRRR&#39;s Blog">
-<meta name="twitter:description" content="stay so cool.">
+<meta name="twitter:title" content="任九皋的blog">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 
-    <link rel="alternate" href="/atom.xml" title="CraneRRR&#39;s Blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="任九皋的blog" type="application/atom+xml">
 
 
 
@@ -56,7 +53,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives | CraneRRR&#39;s Blog</title>
+<title>Archives | 任九皋的blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -102,6 +99,8 @@
           <h1 class="header-author"><a href="/">CraneRRR</a></h1>
         </hgroup>
 
+        
+        <p class="header-subtitle">我永远都爱珍珠奶茶！</p>
         
 
         
@@ -174,8 +173,6 @@
                             
                                 <a class="fa GitHub" href="#" title="GitHub"></a>
                             
-                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
-                            
                                 <a class="fa QQ" href="/1762184255" title="QQ"></a>
                             
                         </ul>
@@ -231,6 +228,8 @@
               <h1 class="header-author"><a href="/" title="回到主页">CraneRRR</a></h1>
             </hgroup>
             
+            <p class="header-subtitle">我永远都爱珍珠奶茶！</p>
+            
             <nav class="header-menu">
                 <ul>
                 
@@ -253,8 +252,6 @@
                                 <a class="fa Email" target="_blank" href="/15963100006@163.com" title="Email"></a>
                             
                                 <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
-                            
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
                             
                                 <a class="fa QQ" target="_blank" href="/1762184255" title="QQ"></a>
                             
@@ -379,12 +376,12 @@
             
             
             
-            
-            
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
             
              archives: ".archive-article-title", 
              miniArchives: "a.post-list-link", 
-            
+             menu: ".header-menu a", 
              friends: "#js-friends a", 
              socail: ".social a" 
         }
@@ -393,6 +390,23 @@
         }
     
 </script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>

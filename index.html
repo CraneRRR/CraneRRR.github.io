@@ -283,7 +283,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/17/自动更新blog/">自动更新blog.md</a>
+      <a class="article-title" href="/2018/11/17/自动更新blog/">自动更新blog</a>
     </h1>
   
 
@@ -293,81 +293,20 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="红岩第三次作业"><a href="#红岩第三次作业" class="headerlink" title="红岩第三次作业"></a>红岩第三次作业</h1><p>内容：</p>
-<ol>
-<li>自动更新你的hexo博客<br>基本要求：<br>使用Python或shell写一个脚本，实现每天定时更新博客。<br>提高要求：<br>自定义更新时间<br>保存更新日志到文件中<br>hints: 可用crontab等工具</li>
-<li>使用Python完成一个基本的shell<br>基本要求：<br>实现echo cd pwd等功能<br>提高要求：<br>实现管道、重定向和后台调度等功能<br>参考：使用 Python 创建你自己的 Shell</li>
-</ol>
-<hr>
-<h2 id="自动化定时博客"><a href="#自动化定时博客" class="headerlink" title="自动化定时博客"></a>自动化定时博客</h2><h3 id="python方面"><a href="#python方面" class="headerlink" title="python方面"></a>python方面</h3><p>写一个自动更新的博客，干脆按照时间来写吧</p>
-<p>参考：<a href="http://www.cnblogs.com/wanpython/archive/2010/08/07/1794598.html" target="_blank" rel="noopener">http://www.cnblogs.com/wanpython/archive/2010/08/07/1794598.html</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">abs_time=time.time()</span><br><span class="line">localtime=time.localtime(abs_time)</span><br><span class="line">result_time=time.strftime(<span class="string">'%Y-%m-%d'</span>,localtime)</span><br><span class="line"><span class="comment">#写出当前时间</span></span><br></pre></td></tr></table></figure>
-<p>然后按照建博客的需求，用os，hexo创建下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.system(<span class="string">"cd blog/source/_posts"</span>)</span><br><span class="line">os.system(<span class="string">"hexo new "</span>+result_time)</span><br></pre></td></tr></table></figure>
-<p>又到了用python直接改写文件的时刻了，参考书python从入门到实践10.2</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar_md= <span class="string">"&#123;0&#125;.md"</span>.format(str(result_time))</span><br><span class="line"><span class="keyword">with</span> open(tar_md,<span class="string">'a'</span>) <span class="keyword">as</span> file_object:</span><br><span class="line">    file_object.write(<span class="string">"sign up time is "</span>+result_time)</span><br></pre></td></tr></table></figure>
-<p>再发布</p>
-<p>总共就是这样的了</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">path=/home/crane/blog/source</span><br><span class="line"><span class="comment">#表示当前时间</span></span><br><span class="line">abs_time=time.time()</span><br><span class="line">localtime=time.localtime(abs_time)</span><br><span class="line">result_time=time.strftime(<span class="string">'%Y-%m-%d'</span>,localtime)</span><br><span class="line"></span><br><span class="line"><span class="comment">#hexo创建+输入内容</span></span><br><span class="line">os.system(<span class="string">"cd blog/source/_posts"</span>)</span><br><span class="line">os.system(<span class="string">"hexo new "</span>+result_time)</span><br><span class="line">tar_md= <span class="string">"&#123;0&#125;.md"</span>.format(str(result_time))</span><br><span class="line"><span class="keyword">with</span> open(tar_md,<span class="string">'a'</span>) <span class="keyword">as</span> file_object:</span><br><span class="line">    file_object.write(<span class="string">"sign up time is "</span>+result_time)</span><br><span class="line"></span><br><span class="line"><span class="comment">#发布</span></span><br><span class="line">os.system(<span class="string">"hexo clean"</span>)</span><br><span class="line">os.system(<span class="string">"hexo g"</span>)</span><br><span class="line">os.system(<span class="string">"hexo d"</span>)</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="crontab学习"><a href="#crontab学习" class="headerlink" title="crontab学习"></a>crontab学习</h3><p>参考来自：<a href="http://www.cnblogs.com/daxian2012/articles/2589894.html" target="_blank" rel="noopener">http://www.cnblogs.com/daxian2012/articles/2589894.html</a></p>
-<p>​        <a href="http://www.cnblogs.com/peida/archive/2013/01/08/2850483.html" target="_blank" rel="noopener">http://www.cnblogs.com/peida/archive/2013/01/08/2850483.html</a></p>
-<hr>
-<h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><p>周期性执行某任务的守护进程。每分钟定期检查是否有要执行的任务，并对其加以执行。</p>
-<hr>
-<h5 id="系统任务调度"><a href="#系统任务调度" class="headerlink" title="系统任务调度"></a>系统任务调度</h5><p>写缓存数据到硬盘，日志清理···</p>
-<p>名字：crontab</p>
-<p>位置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /etc</span><br></pre></td></tr></table></figure>
-<h5 id="用户任务调度"><a href="#用户任务调度" class="headerlink" title="用户任务调度"></a>用户任务调度</h5><p>备份用户数据，定时提醒···</p>
-<p>名字：用户名</p>
-<p>自定义crontab位置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /var/spool/cron</span><br></pre></td></tr></table></figure>
-<h4 id="crontab权限-amp-文件"><a href="#crontab权限-amp-文件" class="headerlink" title="crontab权限&amp;文件"></a>crontab权限&amp;文件</h4><p>文件：</p>
-<p>/etc/cron.deny</p>
-<p>说明：</p>
-<p>该文件中所列用户不允许使用crontab命令</p>
-<p>文件：</p>
-<p>/etc/cron.allow</p>
-<p>说明：</p>
-<p>该文件中所列用户允许使用crontab命令</p>
-<p>文件：</p>
-<p>/var/spool/cron/</p>
-<p>说明：所有用户crontab文件存放的目录,以用户名命名</p>
-<h4 id="crontab格式"><a href="#crontab格式" class="headerlink" title="crontab格式"></a>crontab格式</h4><p>crontab文件的含义：</p>
-<p>用户所建立的crontab文件中，每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段，格式如下：</p>
-<p>minute   hour   day   month   week   command</p>
-<hr>
-<p>minute： 表示分钟，可以是从0到59之间的任何整数。</p>
-<p>hour：表示小时，可以是从0到23之间的任何整数。</p>
-<p>day：表示日期，可以是从1到31之间的任何整数。</p>
-<p>month：表示月份，可以是从1到12之间的任何整数。</p>
-<p>week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。</p>
-<p>command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。</p>
-<hr>
-<p>星号（*）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作。</p>
-<p>逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”</p>
-<p>中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”</p>
-<p>正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。</p>
-<hr>
-<h4 id="瞎鸡儿试试吧"><a href="#瞎鸡儿试试吧" class="headerlink" title="瞎鸡儿试试吧"></a>瞎<del>鸡儿</del>试试吧</h4><p>···太多了吧 显然记不住 为了睡眠随便尝试一下</p>
-<p>本来想用yum安装，结果发现ubuntu不支持，直接apt-get辽</p>
-<p>每天一次的话，参考：</p>
-<p>正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。</p>
-<p>分钟 小时 几号 月份 星期</p>
-<p>需要注意的是不能太早，不然就是bad hour错误</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crontab -e  #启动，接下来选择编辑器用了vim</span><br><span class="line">#打开后发现样子很乖</span><br><span class="line"># m h  dom mon dow   command  </span><br><span class="line">#时间+命令，快照存货虚拟机不慌，：））</span><br><span class="line"># m h  dom mon dow   command  </span><br><span class="line">30 6 * * * python3 /home/crane/blog/source/_posts/i.py</span><br></pre></td></tr></table></figure>
-<p>这样大概就是六点三十的打卡了，假装自己能够早起，真刺激。(<em>^▽^</em>)</p>
-<p>至于part2，dbq，我好困，先睡了，起来再肝55555.</p>
-
+              <p><excerpt in="" index="" |="" 首页摘要=""><br>+
+          
       
-    </div>
+    </excerpt></p></div>
     
     <div class="article-info article-info-index">
       
       
 
       
+      
+        <p class="article-more-link">
+          <a href="/2018/11/17/自动更新blog/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -414,18 +353,20 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>这是第一篇试水的博客。</p>
-<p>其实现在在上托福，但我在认真严肃的走神。</p>
-<p>最近吃了很多，但我还是很饿，重庆的冬天实在太冷了。</p>
-
+              <p><excerpt in="" index="" |="" 首页摘要=""><br>+
+          
       
-    </div>
+    </excerpt></p></div>
     
     <div class="article-info article-info-index">
       
       
 
       
+      
+        <p class="article-more-link">
+          <a href="/2018/11/13/第一篇blog/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
